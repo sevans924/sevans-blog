@@ -39,12 +39,11 @@ const Home = ({ recentPosts, categoryList }) => {
       exit='exit'
     >
       <Head>
-        <title>paradigm. a tech news blog.</title>
+        <title>sarah evans.</title>
       </Head>
       <Header categoryList={categoryList} />
       <main>
         <HomeArticles posts={recentPosts} />
-        <NewsletterBanner />
         <CategoryCards categoryList={categoryList} />
       </main>
       <Footer />

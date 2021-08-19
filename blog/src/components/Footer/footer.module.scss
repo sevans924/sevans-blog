@@ -1,8 +1,9 @@
 @use '../../styles/theme';
 
 .footer {
-  background-color: theme.$secondary-dark;
+  background-color: theme.$color-200;
   color: theme.$primary;
+  font-family: theme.$logo-font;
 
   &__wrapper {
     @include theme.wrap-section;
@@ -22,7 +23,7 @@
 
   &__itemCopyright {
     flex: 0 100%;
-    font-family: theme.$header-font;
+    font-family: theme.$logo-font;
     color: theme.$color-300;
   }
 }

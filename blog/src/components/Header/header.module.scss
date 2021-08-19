@@ -3,7 +3,7 @@
 $headerSize: 150px;
 
 .header {
-  background-color: theme.$secondary-dark;
+  background-color: theme.$color-200;
   height: $headerSize;
   position: sticky;
   z-index: 9999;
@@ -16,28 +16,18 @@ $headerSize: 150px;
     align-items: stretch;
   }
 
-  &__itemLeft {
-    flex: 0 35%;
+  &__itemCenter {
+    flex: none;
     display: flex;
     align-items: center;
-  }
-
-  &__menuBtn {
-    margin-top: 20px;
-    background-color: transparent;
-    border: none;
-    padding: 0;
-  }
-
-  &__itemCenter {
-    flex: 0 33%;
-    text-align: center;
-    margin-left: auto;
+    flex-direction: row;
     @include theme.lg() {
       margin-left: unset;
       margin-right: auto;
+      flex-direction: row;
     }
   }
+
 
   &__title {
     font-family: theme.$logo-font;
@@ -53,39 +43,13 @@ $headerSize: 150px;
     }
   }
 
-  &__menu {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    max-height: calc(100vh - #{$headerSize});
-
-    max-height: 100vh;
-    overflow: scroll;
-    top: $headerSize;
-    z-index: 9998;
-    transition: all 0.75s cubic-bezier(0.86, 0, 0.07, 1);
-    background-color: theme.$secondary-dark;
-
-    &--closed {
-      left: -100vw;
-      transition-delay: 1s;
-    }
-
-    &--open {
-      left: 0;
-    }
-  }
-  h2 {
-    @include theme.wrap-section;
-    text-align: center;
-    color: theme.$primary;
-  }
   &__nav {
     @include theme.wrap-section;
     padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
     color: theme.$primary;
     max-height: calc(100vh - #{$headerSize});
     overflow: auto;
@@ -93,19 +57,18 @@ $headerSize: 150px;
     &::-webkit-scrollbar {
       display: none;
     }
+    @include theme.lg() {
+      flex-direction: row;
+    }
   }
 
   &__navlink {
     padding: 12px;
     font-size: theme.$header4;
+    font-family: theme.$header-font;
     color: theme.$primary;
     transition: all 0.5s cubic-bezier(1, 0.1, 0.1, 1);
     cursor: pointer;
-    background-image: linear-gradient(
-      to bottom,
-      theme.$primary 0%,
-      theme.$primary 100%
-    );
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 0 100%;
@@ -113,7 +76,7 @@ $headerSize: 150px;
     &:focus,
     &:active {
       background-size: 100% 100%;
-      color: theme.$secondary-dark;
+      color: theme.$highlight;
     }
   }
 }

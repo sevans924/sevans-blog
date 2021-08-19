@@ -1,5 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
+import { ThemeProvider } from '../utils/ThemeProvider';
 import 'normalize.css';
 import '../styles/globals.scss';
 
