@@ -1,9 +1,7 @@
-$primary: #ffffff;
-$primary-dark: #cccccc;
-
-$secondary: #3b3f45;
-$secondary-light: #546172;
-$secondary-dark: #011120;
+$primary: #011120;
+$primary-inverted: #ffffff;
+$background: #ffffff;
+$background-inverted: #011120;
 
 $color-100: #F7E4E5;
 $color-200: #EFE7E8;
@@ -15,5 +13,54 @@ $warning: #fa4141;
 
 $highlight: #0000FF;
 
+$themes: (
+  default: (
+    bg: $background,
+    text: $primary,
+    link: $color-300,
+    hover: $color-400,
+    border: $primary,
+    white: $primary-inverted,
+    dark: $primary,
+  ),
+  dark: (
+    bg: $background-inverted,
+    text: $primary-inverted,
+    link: $color-500,
+    hover: $color-500,
+    border: $primary-inverted,
+    white: $primary-inverted,
+    dark: $primary,
+  ),
+);
+
+@mixin themed() {
+  @each $theme, $colorMap in $themes {
+    &--#{$theme} {
+      $theme-map: () !global;
+      @each $key, $submap in $colorMap {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function t($key) {
+  @return map-get($theme-map, $key);
+}
 
 
+
+// $color-100:#EAE7DC;
+// $color-200: #D8C3A5;
+// $color-300: #8E8D8A;
+// $color-400: #E98074;
+// $color-500: #E85A4F;
