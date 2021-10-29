@@ -1,9 +1,8 @@
 @use '../../styles/theme';
 
 .image {
-  margin: 48px 0;
-
   &__wrapper {
+    margin: 48px 0;
     max-width: 100%;
     min-height: 475px;
     max-height: 800px;
@@ -11,9 +10,17 @@
     text-align: center;
   }
 
-  &__caption {
-    background-color: theme.$secondary;
-    color: theme.$primary;
-    padding: 8px;
+  &__media-alt {
+    position: absolute;
+    top: 92%;
+    width: 95%;
+    margin: 0 2.5%;
+    padding: 0 24px;
+    text-align: left;
+    @include theme.themed() {
+      color: theme.t('bg');
+      background-color: theme.t('text');
+      box-shadow: 0 0 12px theme.t('text');
+    }
   }
 }

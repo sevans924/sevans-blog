@@ -1,94 +1,37 @@
-import Head from 'next/head';
-import { motion } from 'framer-motion';
-
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import NewsletterBanner from '../../components/NewsletterBanner';
-
-import SingleArticleBanner from '../../components/SingleArticleBanner';
-import SingleArticleContent from '../../components/SingleArticleContent';
-import SingleArticleRelated from '../../components/SingleArticleRelated';
-
+import Layout from '../../components/Layout';
+import SingleResource from '../../components/SingleResource';
 import {
-  getPostSlugs,
-  getSinglePost,
-  getRelatedPosts,
-} from '../../utils/posts';
-import { getCategoryList } from '../../utils/categories';
+  getAllResourceSlugs,
+  getResourceData,
+} from '../../utils/fetch-resources';
 
-const variants = {
-  initial: {
-    y: -10,
-    opacity: 0,
-  },
-  enter: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.35,
-      delay: 0.35,
-      when: 'beforeChildren',
-    },
-  },
-  exit: {
-    y: 150,
-    opacity: 0,
-    transition: { duration: 0.35, when: 'afterChildren' },
-  },
-};
-
-const Article = ({ postData, categoryList, relatedPosts }) => {
+const Resource = ({ resourceData=[] }) => {
   return (
-    <motion.div
-      variants={variants}
-      initial='initial'
-      animate='enter'
-      exit='exit'
-    >
-      <Head>
-        <title>{postData.title} - paradigm.</title>
-      </Head>
-      <Header categoryList={categoryList} />
-      <main>
-        <SingleArticleBanner
-          featuredImage={postData.featuredImage}
-          title={postData.title}
-          excerpt={postData.excerpt}
-        />
-        <SingleArticleContent
-          author={postData.author.name}
-          content={postData.content}
-          date={postData.createdAt}
-          category={postData.category}
-        />
-        <NewsletterBanner />
-        <SingleArticleRelated posts={relatedPosts} />
-      </main>
-      <Footer />
-    </motion.div>
+    <Layout>
+        <SingleResource resource={resourceData} />
+    </Layout>
   );
 };
 
-export const getStaticPaths = async () => {
-  const paths = await getPostSlugs();
-  return {
-    paths,
-    fallback: false,
-  };
-};
+// add getStaticPaths
+// export const getStaticPaths = ({ locales }) => {
+//   const paths = getAllResourceSlugs(locales);
 
-export const getStaticProps = async ({ params }) => {
-  const relatedPosts = await getRelatedPosts(params.category);
-  const postData = await getSinglePost(params.slug);
-  const categoryList = await getCategoryList();
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// };
 
-  return {
-    props: {
-      relatedPosts,
-      postData,
-      categoryList,
-    },
-  };
-};
+// // add getStaticProps
+// export const getStaticProps = async ({ params, locale }) => {
+//   const resourceData = await getResourceData(params.slug, locale);
 
-export default Article;
+//   return {
+//     props: {
+//       resourceData,
+//     },
+//   };
+// };
+
+export default Resource;

@@ -1,0 +1,60 @@
+@use '../../styles/theme';
+@use 'sass:color';
+
+.resource {
+  &__grid {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: 1fr;
+    grid-gap: 36px;
+    @include theme.lg() {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__item {
+    position: relative;
+    overflow: auto;
+    min-height: 550px;
+    transform-origin: center;
+    transition: theme.$transition;
+
+    @include theme.themed() {
+      &:hover,
+      &:focus {
+        transform: scale(1.025);
+        color: theme.t('text');
+        box-shadow: 0 0 8px theme.t('text');
+      }
+    }
+
+    &-data {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      padding: 24px;
+      &__inner {
+        width: 100%;
+        height: 100%;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+
+        @include theme.themed() {
+          color: theme.t('text');
+          background-color: color.scale(theme.t('bg'), $alpha: -10%);
+        }
+      }
+    }
+
+    &-button {
+      margin-top: auto;
+      padding: 8px 12px;
+      @include theme.themed() {
+        color: theme.t('bg');
+        background-color: theme.t('text');
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@use '../../styles/theme';
+
+.page {
+  &__layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    > * {
+      width: 100%;
+    }
+    transition: theme.$transition;
+
+    @include theme.themed() {
+      color: theme.t('text');
+      background-color: theme.t('bg');
+    }
+  }
+
+  &__main-content {
+    @include theme.wrap-section;
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+}

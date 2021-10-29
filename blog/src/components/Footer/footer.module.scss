@@ -1,29 +1,38 @@
 @use '../../styles/theme';
 
 .footer {
-  background-color: theme.$color-200;
-  color: theme.$primary;
-  font-family: theme.$logo-font;
+  margin-top: auto;
+  padding: 24px 0;
 
   &__wrapper {
     @include theme.wrap-section;
-    padding-top: 48px;
-    padding-bottom: 48px;
-    display: flex;
-    flex-wrap: wrap;
   }
+  @include theme.themed {
+    .footer {
+      background-color: theme.t('text');
+      &__title-link {
+        color: theme.t('text');
+      }
 
-  &__itemInfo {
-    flex: 0 100%;
+      &__navlink {
+        color: theme.t('text');
+        background-image: linear-gradient(theme.t('text'), theme.t('text'));
 
-    @include theme.md() {
-      flex: 0 50%;
+        &:hover {
+          color: theme.t('bg');
+        }
+        &:focus,
+        &:active {
+          color: theme.t('bg');
+          outline: 1px solid theme.t('text');
+        }
+      }
+
+      &__navlink-active {
+        background-image: linear-gradient(theme.t('text'), theme.t('text'));
+        color: theme.t('bg');
+        outline: 1px solid theme.t('text');
+      }
     }
-  }
-
-  &__itemCopyright {
-    flex: 0 100%;
-    font-family: theme.$logo-font;
-    color: theme.$color-300;
   }
 }

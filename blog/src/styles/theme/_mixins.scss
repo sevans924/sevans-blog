@@ -1,5 +1,3 @@
-@use 'sass:color';
-
 @mixin md() {
   @media (min-width: 768px) {
     @content;
@@ -26,6 +24,12 @@
 
 @mixin wrap-section() {
   max-width: 1200px;
+  width: 92vw;
+  margin: 0 auto;
+}
+
+@mixin wrap-content() {
+  max-width: 80ch;
   width: 92vw;
   margin: 0 auto;
 }
